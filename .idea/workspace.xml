@@ -5,19 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0d16dc4-0b0c-4e9f-954d-b2347bf1da27" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphBatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphBatch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphInputPartition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphInputPartition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphPartitionReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphPartitionReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphPartitionReaderFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphPartitionReaderFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphScan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphScan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphScanBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphScanBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphTable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "alihsan-tsdln"
+  }
 }]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/alihsan-tsdln/janusgraph-spark-connector",
+    "accountId": "c3684400-6565-4e5c-8240-cd4fdc142541"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2k9eeUuXGCnWOaLc758YLu39Rfr" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -26,11 +55,27 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
+    "Maven.spark-janusgraph-connector [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
+    "Maven.spark-janusgraph-connector [org.apache.maven.plugins:maven-install-plugin:3.1.1:install].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true"
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/aliihsantasdelen/Desktop/neo4jconnector/neo4j-spark-connector",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" singleton="false">
+      <option name="MAIN_CLASS_NAME" value="org.crimson.Main" />
+      <module name="spark-janusgraph-connector" />
+      <option name="VM_PARAMETERS" value="--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED " />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
