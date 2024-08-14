@@ -8,6 +8,7 @@ import org.apache.spark.sql.connector.read.PartitionReader;
 import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
 import org.apache.spark.unsafe.types.UTF8String;
+import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.structure.Edge;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
@@ -26,7 +27,8 @@ public class JanusGraphPartitionReader implements PartitionReader<InternalRow> {
     private final JanusGraph graph;
     private final GraphTraversalSource g;
 
-    Iterator iterator;
+    //GraphTraversal<?, ?> iterator;
+    Iterator<Object> iterator;
 
     List<String> fieldNames;
 
@@ -36,13 +38,7 @@ public class JanusGraphPartitionReader implements PartitionReader<InternalRow> {
         this.partitioning = partitioning;
         this.inputPartition = inputPartition;
 
-        System.out.println("PROPERTIES");
-        System.out.println(properties);
-        System.out.println("SCHEMA");
-        System.out.println(schema);
-        System.out.println("INPUT PARTITION");
-        System.out.println(inputPartition);
-        System.out.println();
+        System.out.println(this.schema);
 
         JanusGraphFactory.Builder build = JanusGraphFactory.build();
 
@@ -55,22 +51,31 @@ public class JanusGraphPartitionReader implements PartitionReader<InternalRow> {
         g = graph.traversal();
 
         if(properties.get("label") != null) {
-            iterator = g.V().hasLabel(properties.get("label"));
+            iterator = g.V().hasLabel(properties.get("label")).limit(10).id();
         } else if (properties.get("relationship") != null) {
-            iterator = g.E().hasLabel(properties.get("relationship"));
+            iterator = g.E().hasLabel(properties.get("relationship")).limit(10).id();
+
             if(properties.get("relationship.source.vertex") != null) {
                 ArrayList<Object> tempList = new ArrayList<>();
-                Iterator<Vertex> sourceVertex = g.V().hasLabel(properties.get("relationship.source.vertex")).out(properties.get("relationship"));
-                while (sourceVertex.hasNext()) { tempList.add(sourceVertex.next()); }
-                while (iterator.hasNext()) { tempList.add(iterator.next()); }
+
+                GraphTraversal<Edge, Object> sourceVertex = g.E().hasLabel(properties.get("relationship")).outV().limit(10).id();
+                
+                while (sourceVertex.hasNext() && iterator.hasNext()) {
+                    tempList.add(sourceVertex.next());
+                    tempList.add(iterator.next());
+                }
+                System.out.println(tempList);
                 iterator = tempList.iterator();
             }
+
         } else {
-            iterator = g.E();
+            iterator = g.E().id();
         }
         fieldNames = Arrays.stream(schema.fields())
                 .map(StructField::name)
                 .toList();
+
+        //graph.close();
     }
 
     @Override
@@ -81,16 +86,15 @@ public class JanusGraphPartitionReader implements PartitionReader<InternalRow> {
     @Override
     public InternalRow get() {
         if(properties.get("label") != null) {
-            Vertex v = (Vertex) iterator.next();
-            List<UTF8String> list = fieldNames.stream().map(n -> UTF8String.fromString(v.value(n).toString())).toList();
+            List<UTF8String> list = fieldNames.stream().map(n -> UTF8String.fromString(g.V(iterator.next().toString()).next().value(n).toString())).toList();
             return new GenericInternalRow(list.toArray());
         } else if (properties.get("relationship") != null) {
-            Edge e = (Edge) iterator.next();
-            List<UTF8String> list = new ArrayList<>(fieldNames.stream().map(n -> UTF8String.fromString(e.value(n).toString())).toList());
+            List<UTF8String> list = new ArrayList<>();
             if(properties.get("relationship.source.vertex") != null) {
-                Vertex v = (Vertex) iterator.next();
-                list.addAll(fieldNames.stream().map(n -> UTF8String.fromString(v.value(n).toString())).toList());
+                System.out.println(fieldNames);
+                list.addAll(fieldNames.stream().map(n -> UTF8String.fromString(g.V(iterator.next().toString()).next().value(n).toString())).toList());
             }
+            list.addAll(fieldNames.stream().map(n -> UTF8String.fromString(g.E(iterator.next().toString()).next().value(n).toString())).toList());
             return new GenericInternalRow(list.toArray());
         }
 

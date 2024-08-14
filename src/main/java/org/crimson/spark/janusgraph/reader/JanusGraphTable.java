@@ -10,7 +10,6 @@ import org.apache.spark.sql.util.CaseInsensitiveStringMap;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,13 +20,6 @@ public record JanusGraphTable(StructType schema, Transform[] partitioning,
         this.schema = schema;
         this.partitioning = partitioning;
         this.properties = properties;
-        System.out.println("JanusGraphTable");
-        System.out.println("SCHEMA");
-        System.out.println(schema);
-        System.out.println("PARTITIONING");
-        System.out.println(Arrays.toString(partitioning));
-        System.out.println("PROPERTIES");
-        System.out.println(properties);
     }
 
     @Contract(pure = true)

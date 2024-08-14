@@ -26,9 +26,11 @@ public class Main {
                 .option("index.search.elasticsearch.client-only", true)
                 //.option("label","person")
                 .option("relationship", "acted")
+                .option("relationship.source.vertex", "person")
                 .load();
 
-        System.out.println("DATAFRAME");
-        a.show();
+        a.show(false);
+
+        spark.close();
     }
 }

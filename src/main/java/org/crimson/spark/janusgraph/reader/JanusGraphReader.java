@@ -55,15 +55,25 @@ public class JanusGraphReader implements TableProvider {
 
             GraphTraversalSource g = graph.traversal();
 
-            Iterator<Property<Object>> keys = g.E().hasLabel(options.get("relationship")).next().properties();
             ArrayList<StructField> list = new ArrayList<>();
+
+            if(options.containsKey("relationship.source.vertex")) {
+                Iterator<VertexProperty<Object>> keysV = g.V().hasLabel(options.get("relationship.source.vertex")).next().properties();
+
+                while (keysV.hasNext()) {
+                    VertexProperty<Object> v = keysV.next();
+                    list.add(new StructField(v.key(), DataTypes.StringType, false, Metadata.empty()));
+                }
+            }
+
+            Iterator<Property<Object>> keys = g.E().hasLabel(options.get("relationship")).next().properties();
 
             while (keys.hasNext()) {
                 Property<Object> a = keys.next();
                 list.add(new StructField(a.key(), DataTypes.StringType, false, Metadata.empty()));
             }
 
-            //TODO ADD SOURCE AND TARGET SCHEMA INFER
+            graph.close();
 
             return new StructType(list.toArray(new StructField[0]));
         }
@@ -87,6 +97,7 @@ public class JanusGraphReader implements TableProvider {
         if(properties.get("label") != null) {
             inferSchema(new CaseInsensitiveStringMap(properties));
         }
+        System.out.println(structType);
         return new JanusGraphTable(structType, partitioning, properties);
     }
 
