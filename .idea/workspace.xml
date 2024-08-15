@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0d16dc4-0b0c-4e9f-954d-b2347bf1da27" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/partitionReaders/JanusGraphPartitionReaderByLabel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/partitionReaders/JanusGraphPartitionReaderByRelation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/partitionReaders/JanusGraphPartitionReaderBySource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphPartitionReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphPartitionReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphPartitionReaderFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphPartitionReaderFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/JanusGraphTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/partitionReaders/JanusGraphPartitionReaderByLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/partitionReaders/JanusGraphPartitionReaderByLabel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/partitionReaders/JanusGraphPartitionReaderByRelation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/partitionReaders/JanusGraphPartitionReaderByRelation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/partitionReaders/JanusGraphPartitionReaderBySource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crimson/spark/janusgraph/reader/partitionReaders/JanusGraphPartitionReaderBySource.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -8,6 +8,7 @@ import org.apache.spark.unsafe.types.UTF8String;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.structure.Edge;
+import org.janusgraph.core.JanusGraph;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -18,9 +19,9 @@ public class JanusGraphPartitionReaderByRelation implements PartitionReader<Inte
     private final Object[] fieldNames;
     private final GraphTraversal<Edge, Edge> iterator;
 
-    public JanusGraphPartitionReaderByRelation(InputPartition inputPartition, Object[] fieldNames, GraphTraversalSource g, String relation) {
+    public JanusGraphPartitionReaderByRelation(InputPartition inputPartition, Object[] fieldNames, JanusGraph graph, String relation) {
         this.fieldNames = fieldNames;
-        iterator = g.E().hasLabel(relation).limit(10);
+        iterator = graph.traversal().E().hasLabel(relation);
     }
 
     @Override

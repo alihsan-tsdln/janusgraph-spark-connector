@@ -9,9 +9,7 @@ public class Main {
 
         SparkSession spark = SparkSession.builder().master("local").appName("CUSTOM DATASOURCE").getOrCreate();
 
-        //label
-        //relationship
-        //query
+        long startTime = System.currentTimeMillis();
 
         Dataset<Row> a = spark.read().format("org.crimson.spark.janusgraph.reader.JanusGraphReader")
                 .option("storage.backend", "cql")
@@ -25,12 +23,16 @@ public class Main {
                 .option("index.search.port", "9200")
                 .option("index.search.elasticsearch.client-only", true)
                 //.option("label","person")
-                .option("relationship", "acted")
-                .option("relationship.source.vertex", "person")
+                //.option("relationship", "acted")
+                //.option("relationship.source.vertex", "person")
+                //.option("relationship.target.vertex", "movie")
                 .load();
 
         a.show(false);
 
         spark.close();
+
+        System.out.println("TIME CONSUMPTION");
+        System.out.println(System.currentTimeMillis() - startTime);
     }
 }

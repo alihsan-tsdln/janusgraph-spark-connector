@@ -8,6 +8,7 @@ import org.apache.spark.unsafe.types.UTF8String;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
+import org.janusgraph.core.JanusGraph;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -18,9 +19,10 @@ public class JanusGraphPartitionReaderByLabel implements PartitionReader<Interna
     private final GraphTraversal<Vertex, Vertex> iterator;
     private final Object[] fieldNames;
 
-    public JanusGraphPartitionReaderByLabel(InputPartition inputPartition, Object[] fieldNames, GraphTraversalSource g, String label) {
+    public JanusGraphPartitionReaderByLabel(InputPartition inputPartition, Object[] fieldNames, JanusGraph graph, String label) {
         this.fieldNames = fieldNames;
-        iterator = g.V().hasLabel(label).limit(10);
+        iterator = graph.traversal().V().hasLabel(label).limit(10);
+        graph.close();
     }
 
     @Override
@@ -36,9 +38,5 @@ public class JanusGraphPartitionReaderByLabel implements PartitionReader<Interna
     @Override
     public void close() {
 
-    }
-
-    public Object[] getFieldNames() {
-        return fieldNames;
     }
 }

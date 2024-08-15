@@ -73,6 +73,15 @@ public class JanusGraphReader implements TableProvider {
                 list.add(new StructField(a.key(), DataTypes.StringType, false, Metadata.empty()));
             }
 
+            if(options.containsKey("relationship.target.vertex")) {
+                Iterator<VertexProperty<Object>> keysV = g.V().hasLabel(options.get("relationship.target.vertex")).next().properties();
+
+                while (keysV.hasNext()) {
+                    VertexProperty<Object> v = keysV.next();
+                    list.add(new StructField(v.key(), DataTypes.StringType, false, Metadata.empty()));
+                }
+            }
+
             graph.close();
 
             return new StructType(list.toArray(new StructField[0]));
@@ -94,9 +103,6 @@ public class JanusGraphReader implements TableProvider {
 
     @Override
     public Table getTable(StructType structType, Transform[] partitioning, Map<String, String> properties) {
-        if(properties.get("label") != null) {
-            inferSchema(new CaseInsensitiveStringMap(properties));
-        }
         System.out.println(structType);
         return new JanusGraphTable(structType, partitioning, properties);
     }
