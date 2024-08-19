@@ -30,6 +30,6 @@ public class JanusGraphBatch implements Batch {
 
     @Override
     public PartitionReaderFactory createReaderFactory() {
-        return new JanusGraphPartitionReaderFactory(schema, partitioning, properties);
+        return new JanusGraphPartitionReaderFactory(schema, properties);
     }
 }

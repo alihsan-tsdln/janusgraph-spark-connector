@@ -23,9 +23,9 @@ public class Main {
                 .option("index.search.port", "9200")
                 .option("index.search.elasticsearch.client-only", true)
                 //.option("label","person")
-                //.option("relationship", "acted")
-                //.option("relationship.source.vertex", "person")
-                //.option("relationship.target.vertex", "movie")
+                .option("relationship", "acted")
+                .option("relationship.source.vertex", "person")
+                .option("relationship.target.vertex", "movie")
                 .load();
 
         a.show(false);

@@ -3,16 +3,14 @@ package org.crimson.spark.janusgraph.reader;
 import org.apache.spark.sql.connector.catalog.Table;
 import org.apache.spark.sql.connector.catalog.TableProvider;
 import org.apache.spark.sql.connector.expressions.Transform;
-import org.apache.spark.sql.types.DataTypes;
-import org.apache.spark.sql.types.Metadata;
-import org.apache.spark.sql.types.StructField;
-import org.apache.spark.sql.types.StructType;
+import org.apache.spark.sql.types.*;
 import org.apache.spark.sql.util.CaseInsensitiveStringMap;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.structure.Property;
 import org.apache.tinkerpop.gremlin.structure.VertexProperty;
 import org.janusgraph.core.JanusGraph;
 import org.janusgraph.core.JanusGraphFactory;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,7 +18,7 @@ import java.util.Map;
 
 public class JanusGraphReader implements TableProvider {
     @Override
-    public StructType inferSchema(CaseInsensitiveStringMap options) {
+    public StructType inferSchema(@NotNull CaseInsensitiveStringMap options) {
         if(options.containsKey("label"))
         {
             JanusGraphFactory.Builder build = JanusGraphFactory.build();
@@ -38,7 +36,7 @@ public class JanusGraphReader implements TableProvider {
 
             while (keys.hasNext()) {
                 VertexProperty<Object> a = keys.next();
-                list.add(new StructField(a.key(), DataTypes.StringType, false, Metadata.empty()));
+                list.add(new StructField(a.key(), checkType(a.value().getClass().getName()), false, Metadata.empty()));
             }
 
             return new StructType(list.toArray(new StructField[0]));
@@ -62,7 +60,7 @@ public class JanusGraphReader implements TableProvider {
 
                 while (keysV.hasNext()) {
                     VertexProperty<Object> v = keysV.next();
-                    list.add(new StructField(v.key(), DataTypes.StringType, false, Metadata.empty()));
+                    list.add(new StructField(v.key(), checkType(v.value().getClass().getName()), false, Metadata.empty()));
                 }
             }
 
@@ -70,7 +68,7 @@ public class JanusGraphReader implements TableProvider {
 
             while (keys.hasNext()) {
                 Property<Object> a = keys.next();
-                list.add(new StructField(a.key(), DataTypes.StringType, false, Metadata.empty()));
+                list.add(new StructField(a.key(), checkType(a.value().getClass().getName()), false, Metadata.empty()));
             }
 
             if(options.containsKey("relationship.target.vertex")) {
@@ -78,7 +76,7 @@ public class JanusGraphReader implements TableProvider {
 
                 while (keysV.hasNext()) {
                     VertexProperty<Object> v = keysV.next();
-                    list.add(new StructField(v.key(), DataTypes.StringType, false, Metadata.empty()));
+                    list.add(new StructField(v.key(), checkType(v.value().getClass().getName()), false, Metadata.empty()));
                 }
             }
 
@@ -110,5 +108,15 @@ public class JanusGraphReader implements TableProvider {
     @Override
     public boolean supportsExternalMetadata() {
         return true;
+    }
+
+    private DataType checkType(String className) {
+        return switch (className) {
+            case "java.lang.Integer" -> DataTypes.IntegerType;
+            case "java.lang.Float" -> DataTypes.FloatType;
+            case "java.lang.Double" -> DataTypes.DoubleType;
+            case "java.lang.Long" -> DataTypes.LongType;
+            default -> DataTypes.StringType;
+        };
     }
 }
